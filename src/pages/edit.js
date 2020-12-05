@@ -29,7 +29,10 @@ export default function EditExercise() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post(`http://localhost:5000/exercise/update/${id}`, exercise)
+      .post(
+        `https://exercise-tracker-mernstack.herokuapp.com/exercise/update/${id}`,
+        exercise
+      )
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
 
@@ -44,7 +47,7 @@ export default function EditExercise() {
   }
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/")
+      .get("https://exercise-tracker-mernstack.herokuapp.com/user/")
       .then((result) => {
         console.log(result.data);
         setUsers((prev) => [...result.data]);
@@ -52,7 +55,7 @@ export default function EditExercise() {
       .catch((err) => console.log(err));
 
     axios
-      .get(`http://localhost:5000/exercise/${id}`)
+      .get(`https://exercise-tracker-mernstack.herokuapp.com/exercise/${id}`)
       .then((result) => {
         console.log(result.data);
         const { username, description, duration, date } = result.data;

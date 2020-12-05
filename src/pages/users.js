@@ -28,7 +28,10 @@ export default function Users() {
   function handleSubmit(e) {
     console.log("working?");
     axios
-      .post("http://localhost:5000/user/add/", username)
+      .post(
+        "https://exercise-tracker-mernstack.herokuapp.com/user/add/",
+        username
+      )
       .then((result) => console.log(result))
       .catch((err) => console.log(err + "error"));
 

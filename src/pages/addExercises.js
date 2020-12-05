@@ -50,7 +50,10 @@ export default function AddExercises() {
   function handleSubmit(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:5000/exercise/add", exercise)
+      .post(
+        "https://exercise-tracker-mernstack.herokuapp.com/exercise/add",
+        exercise
+      )
       .then((result) => console.log(result))
       .catch((err) => console.log(err));
 
@@ -65,7 +68,7 @@ export default function AddExercises() {
   }
   useEffect(() => {
     axios
-      .get("http://localhost:5000/user/")
+      .get("https://exercise-tracker-mernstack.herokuapp.com/user/")
       .then((result) => {
         console.log(result.data);
         setUsers((prev) => [...result.data]);
