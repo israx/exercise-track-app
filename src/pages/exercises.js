@@ -42,7 +42,7 @@ export default function Exercises() {
 
   function handleDelete(id) {
     axios
-      .delete(`https://exercise-tracker-mernstack.herokuapp.com/${id}`)
+      .delete(`https://exercise-tracker-mernstack.herokuapp.com/exercise/${id}`)
       .then((result) => {
         console.log(result);
         setExercises(exercises.filter((exercise) => exercise._id !== id));
@@ -51,7 +51,7 @@ export default function Exercises() {
   }
   useEffect(() => {
     axios
-      .get("https://exercise-tracker-mernstack.herokuapp.com/")
+      .get("https://exercise-tracker-mernstack.herokuapp.com/exercise")
       .then((result) => setExercises([...result.data]))
       .catch((err) => console.log(err));
   }, []);
