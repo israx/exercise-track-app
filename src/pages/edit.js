@@ -5,8 +5,10 @@ import axios from "axios";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AddExercisesStyling } from "./addExercises";
+import { useHistory } from "react-router-dom";
 
 export default function EditExercise() {
+  const history = useHistory();
   const { id } = useParams();
   console.log(id);
   const [users, setUsers] = useState([]);
@@ -33,7 +35,10 @@ export default function EditExercise() {
         `https://exercise-tracker-mernstack.herokuapp.com/exercise/update/${id}`,
         exercise
       )
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        history.push("/exercises");
+      })
       .catch((err) => console.log(err));
 
     setExercise({
@@ -42,8 +47,6 @@ export default function EditExercise() {
       duration: "",
       date: new Date(),
     });
-
-    window.location = "/exercises";
   }
   useEffect(() => {
     axios

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -37,6 +38,7 @@ export default function AddExercises() {
     duration: "",
     date: new Date(),
   });
+  const history = useHistory();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -54,7 +56,10 @@ export default function AddExercises() {
         "https://exercise-tracker-mernstack.herokuapp.com/exercise/add",
         exercise
       )
-      .then((result) => console.log(result))
+      .then((result) => {
+        history.push("/exercises");
+        console.log(result);
+      })
       .catch((err) => console.log(err));
 
     setExercise({
@@ -63,8 +68,6 @@ export default function AddExercises() {
       duration: "",
       date: new Date(),
     });
-
-    window.location = "/exercises";
   }
   useEffect(() => {
     axios

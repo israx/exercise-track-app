@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -19,6 +20,7 @@ const UserStyling = styled.div`
 `;
 export default function Users() {
   const [username, setUsername] = useState({ username: "" });
+  const history = useHistory();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -26,29 +28,33 @@ export default function Users() {
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
     console.log("working?");
     axios
       .post(
         "https://exercise-tracker-mernstack.herokuapp.com/user/add/",
         username
       )
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+      })
       .catch((err) => console.log(err + "error"));
 
-    setUsername({ username: "" });
-    window.location = "exercises/add";
+    history.push("/exercises/add");
   }
   return (
     <UserStyling>
       <h2>Add User:</h2>
-      <input
-        type="text"
-        onChange={handleChange}
-        value={username.username}
-        name="username"
-        required
-      />
-      <button onClick={handleSubmit}>Send</button>
+      <form action="" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          onChange={handleChange}
+          value={username.username}
+          name="username"
+          required
+        />
+        <button>Send</button>
+      </form>
     </UserStyling>
   );
 }
